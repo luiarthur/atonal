@@ -22,4 +22,20 @@ class TestSuite extends FunSuite {
     assert(Note("C").shift(12) == "C")
     assert(Note("C").shift(9) == "A")
   }
+
+  test("Atonal") {
+    import Atonal._
+    val numMat = genRandomMatrix
+    printMatrix(numMat); println
+
+    val letterMat = matApply(numMat, Note.notes)
+    printMatrix(letterMat, spaces=2); println
+
+    // Shifted so that prime is D
+    // val dMat = matApply(letterMat, {n:String => Note(n).shift(2)})
+    // printMatrix(dMat, spaces=2); println
+    val prime = "C,F,G#,A,C#,D,B,E,D#,G,F#,A#".split(",").toVector
+    val myMat = matFromLetterPrime(prime)
+    printMatrix(myMat,2)
+  }
 }
